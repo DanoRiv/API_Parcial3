@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ParcialAPI.DAL;
+using ParcialAPI.Domain.Interfaces;
+using ParcialAPI.Domain.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,10 @@ builder.Services.AddControllers();
 
 // Database connection
 builder.Services.AddDbContext<DataBaseContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Dependency injection for services
+builder.Services.AddScoped<ICountryService, CountryService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
