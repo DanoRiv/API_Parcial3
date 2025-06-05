@@ -16,7 +16,9 @@ namespace ParcialAPI.Domain.Services
         {
             try
             {
-                return await _context.Countries.ToListAsync();
+                return await _context.Countries
+                    .Include(c => c.States)
+                    .ToListAsync();
             }
             catch (DbUpdateException dbUpdateException)
             {
