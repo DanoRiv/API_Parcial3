@@ -80,10 +80,9 @@ public class CountriesController : Controller
     [Route("Delete/{id}")]
     public async Task<ActionResult<Country>> DeleteCountryAsync(Guid id)
     {
-        if(id == null) return BadRequest("Country ID cannot be null.");
+        if(id == Guid.Empty) return BadRequest("Country ID cannot be null.");
         var deletedCountry = await _countryService.DeleteCountryAsync(id);
         if (deletedCountry == null) return NotFound();
-        return Ok(deletedCountry);
-        
+        return Ok(deletedCountry); 
     }
 }
