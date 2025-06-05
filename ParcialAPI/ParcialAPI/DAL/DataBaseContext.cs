@@ -15,10 +15,12 @@ public class DataBaseContext : DbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Country>()
             .HasIndex(c => c.Name).IsUnique();
+        modelBuilder.Entity<State>().HasIndex("Name", "CountryId").IsUnique();
     }
 
     #region DbSets
     public DbSet<Country> Countries { get; set; }
+    public DbSet<State> States { get; set; }
 
     #endregion
 }
